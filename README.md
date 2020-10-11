@@ -18,7 +18,7 @@ We use this action to deploy those queued deployments at a scheduled moment.
 ### `deployments`
 
 Matrix containing the following keys (with example data):
-```json
+```json5
 {
     "environment": "production",
     "deployment_id": 1234,
