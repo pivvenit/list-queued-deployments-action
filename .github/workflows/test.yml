@@ -1,0 +1,37 @@
+on: [push]
+
+jobs:
+  deployments:
+    runs-on: ubuntu-latest
+    name: Test the action
+    outputs:
+      deployments: ${{ steps.deployments.outputs.deployments }}
+    steps:
+      # To use this repository's private action,
+      # you must check out the repository
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Create deployments
+        uses: chrnorm/deployment-action@releases/v1
+        id: deployment
+        with:
+          initial_status: queued
+          token: "${{ github.token }}"
+          target_url: https://example.com
+          environment: production
+      - name: Test this repository
+        uses: ./ # Uses an action in the root directory
+        id: deployments
+        with:
+          repository: "${{ github.repository }}"
+          token: "${{ github.token }}"
+  job2:
+    needs: deployments
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{fromJson(needs.deployments.outputs.deployments)}}
+    steps:
+      - run: echo ${{ matrix.deployment_id }}
+      - run: echo ${{ matrix.status }}
+      - run: echo ${{ matrix.ref }}
+      - run: echo ${{ matrix.environment }}

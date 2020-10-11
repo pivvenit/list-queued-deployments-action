@@ -1,0 +1,15 @@
+name: 'List queued deployments'
+description: 'Lists all queued deployments of the specified repository'
+inputs:
+  repository:  # id of input
+    description: 'Repository for which to list the queued deployments'
+    required: true
+  token:
+    description: 'Github token'
+    required: true
+outputs:
+    deployments:
+      description: "The matrix containing all the deployments to execute"
+runs:
+  using: 'node12'
+  main: 'index.js'
