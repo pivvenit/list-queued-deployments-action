@@ -11,6 +11,7 @@ const github = require('@actions/github');
         const octokit = github.getOctokit(authToken);
 
         const output = [];
+        const seenEnvironments = [];
 
         for await (const {data: deployments} of octokit.paginate.iterator(
             octokit.repos.listDeployments,
@@ -21,6 +22,9 @@ const github = require('@actions/github');
         )) {
             for (const deployment of deployments) {
                 core.info(`Deployment: ${deployment.environment} (#${deployment.id})`);
+                if (seenEnvironments[deployment.environment]) {
+                    continue;
+                }
                 const {data: statuses } = await octokit.repos.listDeploymentStatuses({
                     owner,
                     repo,
@@ -33,6 +37,7 @@ const github = require('@actions/github');
                 core.info(`Status: ${deployment.environment} (#${deployment.id}) ${statuses[0].state}`);
                 // The list of statuses is sorted on last to first.
                 // If it is not queued, this deployment has already been handled.
+                seenEnvironments[deployment.environment] = true;
                 if (statuses[0].state !== "queued") {
                     continue;
                 }
