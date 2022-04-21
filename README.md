@@ -22,10 +22,11 @@ Matrix containing the following keys (with example data):
 {
     "environment": "production",
     "deployment_id": 1234,
+    "deployment_url": "/repos/pivvenit/list-queued-deployments-action/deployments/1234/statuses",
     "status": "queued",
     "ref": "deployment ref here",
     "deployment": {/* Raw deployment response from the Github Rest API */},
-    "deployment_status": { /* Raw deployment_status response from the Github Rest API */}
+    "deployment_status": { /* The first status from the deployment_status response from the Github Rest API */}
 }
 ```
 

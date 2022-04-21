@@ -44,6 +44,7 @@ const github = require('@actions/github');
                 output.push({
                     environment: deployment.environment,
                     deployment_id: deployment.id,
+                    deployment_url: deployment.url,
                     status: statuses[0].state,
                     ref: deployment.ref,
                     deployment: deployment,
