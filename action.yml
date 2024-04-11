@@ -7,6 +7,9 @@ inputs:
   token:
     description: 'Github token'
     required: true
+  ref:
+    description: 'Github branch'
+    required: true
 outputs:
     deployments:
       description: "The matrix containing all the deployments to execute"
