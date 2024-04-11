@@ -38,9 +38,6 @@ const github = require('@actions/github');
                 // The list of statuses is sorted on last to first.
                 // If it is not queued, this deployment has already been handled.
                 seenEnvironments[deployment.environment] = true;
-                if (statuses[0].state !== "queued") {
-                    continue;
-                }
                 output.push({
                     environment: deployment.environment,
                     deployment_id: deployment.id,
