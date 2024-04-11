@@ -1,13 +1,12 @@
-# List Queued deployments Github Action
+# List deployments Github Action
 
-This action returns a matrix that contains all deployments of a repository that have the 'queued' status.
-We use this action to deploy those queued deployments at a scheduled moment.
+This action returns a matrix that contains all deployments of a repository.
 
 ## Inputs
 
 ### `repository`
 
-**Required** Repository for which to list the queued deployments.
+**Required** Repository for which to list the deployments.
 
 ### `Token`
 
@@ -32,7 +31,7 @@ Matrix containing the following keys (with example data):
 
 ## Example usage
 ```yaml
-uses: pivvenit/list-queued-deployments-action
+uses: dashcamio/list-deployments-action
 with:
   token: "${{ github.token }}"
   repository: "${{ github.repository }}"
