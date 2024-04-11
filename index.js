@@ -8,6 +8,7 @@ const github = require('@actions/github');
 
         const [owner, repo] = repository.split('/');
         const authToken = core.getInput('token');
+        const ref = core.getInput('ref');
         const octokit = github.getOctokit(authToken);
 
         const output = [];
@@ -18,6 +19,7 @@ const github = require('@actions/github');
             {
                 owner,
                 repo,
+                ref
             }
         )) {
             for (const deployment of deployments) {
