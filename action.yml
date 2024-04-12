@@ -9,7 +9,7 @@ inputs:
     required: true
   ref:
     description: 'Github branch'
-    required: true
+    required: false
 outputs:
     deployments:
       description: "The matrix containing all the deployments to execute"

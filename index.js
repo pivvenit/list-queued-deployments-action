@@ -18,12 +18,12 @@ const github = require('@actions/github');
             octokit.repos.listDeployments,
             {
                 owner,
-                repo,
-                ref
+                repo
             }
         )) {
             for (const deployment of deployments) {
                 core.info(`Deployment: ${deployment.environment} (#${deployment.id})`);
+                console.log(deployment)
                 if (seenEnvironments[deployment.environment]) {
                     continue;
                 }
