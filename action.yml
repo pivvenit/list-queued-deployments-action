@@ -11,5 +11,5 @@ outputs:
     deployments:
       description: "The matrix containing all the deployments to execute"
 runs:
-  using: 'node12'
+  using: 'node20'
   main: 'index.js'
