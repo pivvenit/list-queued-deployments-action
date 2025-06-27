@@ -1,5 +1,8 @@
 on: [push]
 
+permissions:
+  deployments: write
+
 jobs:
   deployments:
     runs-on: ubuntu-latest
