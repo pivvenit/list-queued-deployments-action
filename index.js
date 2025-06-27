@@ -14,21 +14,18 @@ const github = require('@actions/github');
         const seenEnvironments = [];
 
         for await (const {data: deployments} of octokit.paginate.iterator(
-            await octokit.request('GET /repos/{owner}/{repo}/deployments', {
-                owner: owner,
-                repo: repo,
-                headers: {
-                    'X-GitHub-Api-Version': '2022-11-28',
-                    'Accept': 'application/vnd.github.v3+json'
-                }
-            })
+            await octokit.rest.repos.listDeployments,
+            {
+                owner,
+                repo,
+            }
         )) {
             for (const deployment of deployments) {
                 core.info(`Deployment: ${deployment.environment} (#${deployment.id})`);
                 if (seenEnvironments[deployment.environment]) {
                     continue;
                 }
-                const {data: statuses } = await octokit.repos.listDeploymentStatuses({
+                const {data: statuses } = await octokit.rest.repos.listDeploymentStatuses({
                     owner,
                     repo,
                     deployment_id: deployment.id
