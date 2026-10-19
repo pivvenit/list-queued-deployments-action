@@ -5,6 +5,7 @@ permissions:
 
 jobs:
   deployments:
+    if: ${{ !startsWith(github.head_ref || github.ref_name, 'claude/') }}
     runs-on: ubuntu-latest
     name: Test the action
     outputs:
@@ -21,6 +22,7 @@ jobs:
           repository: "${{ github.repository }}"
           token: "${{ github.token }}"
   job2:
+    if: ${{ !startsWith(github.head_ref || github.ref_name, 'claude/') }}
     needs: deployments
     runs-on: ubuntu-latest
     strategy:
